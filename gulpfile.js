@@ -27,7 +27,8 @@ gulp.task('html', function() {
 gulp.task('acss', () => {
   return gulp.src('src/*.html')
     .pipe(gulpAtomizer({
-      outfile: 'atomic.css'
+      outfile: 'atomic.css',
+      addRules: require('atomizer-emmet-compat')
     }))
     .pipe(gulp.dest('dist'));
 });
