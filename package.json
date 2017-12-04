@@ -1,11 +1,9 @@
 {
-  "dependencies": {
-    "browser-sync": "^2.18.13",
-    "gulp": "^3.9.1",
-    "gulp-atomizer": "^3.0.7",
-    "gulp-html-minifier": "^0.1.8"
-  },
   "devDependencies": {
-    "atomizer-emmet-compat": "0.1.2"
+    "atomizer-emmet-compat": "0.1.2",
+    "browser-sync": "2.18.13",
+    "gulp": "3.9.1",
+    "gulp-atomizer": "3.0.7",
+    "gulp-html-minifier": "0.1.8"
   }
 }
