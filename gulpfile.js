@@ -1,31 +1,24 @@
 const gulp = require('gulp');
 const gulpAtomizer = require('gulp-atomizer');
-const gulpHtmlMin = require('gulp-html-minifier');
 const browserSync = require('browser-sync').create();
 
-gulp.task('bs', ['html', 'acss'], () => {
+gulp.task('bs', ['acss'], () => {
   browserSync.init({
     server: {
-      baseDir: "./dist"
+      baseDir: "./"
     }
   });
 
-  gulp.watch(["src/*.html"], ['html', 'acss']);
+  gulp.watch(["*.html"], ['acss', 'html-watch']);
 });
 
-gulp.task('html', function() {
-  return gulp.src(['src/*.html'])
-    .pipe(gulpHtmlMin({
-      collapseInlineTagWhitespace: true,
-      collapseWhitespace: true,
-      removeComments: true
-    }))
-    .pipe(gulp.dest('dist'))
-    .pipe(browserSync.stream());
+gulp.task('html-watch', function (done) {
+  browserSync.reload();
+  done();
 });
 
 gulp.task('acss', () => {
-  return gulp.src('src/*.html')
+  return gulp.src('*.html')
     .pipe(gulpAtomizer({
       outfile: 'atomic.css',
       addRules: require('atomizer-emmet-compat')
@@ -33,6 +26,4 @@ gulp.task('acss', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('rebuild', ['html', 'acss']);
-
-gulp.task('default', ['rebuild', 'bs']);
+gulp.task('default', ['bs']);
