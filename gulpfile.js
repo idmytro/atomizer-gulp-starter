@@ -12,7 +12,7 @@ gulp.task('bs', ['acss'], () => {
   gulp.watch(["*.html"], ['acss', 'html-watch']);
 });
 
-gulp.task('html-watch', function (done) {
+gulp.task('html-watch', done => {
   browserSync.reload();
   done();
 });
