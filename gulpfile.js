@@ -21,6 +21,8 @@ gulp.task('acss', () => {
   return gulp.src('*.html')
     .pipe(gulpAtomizer({
       outfile: 'atomic.css',
+      /* if you use config */
+      acssConfig: Object.assign({}, require('./config')),
       addRules: require('atomizer-emmet-compat')
     }))
     .pipe(gulp.dest('dist'));
