@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const gulpAtomizer = require('gulp-atomizer');
 const browserSync = require('browser-sync').create();
-const emmetRules = require('atomizer-emmet-compat');
 
 gulp.task('bs', ['acss'], () => {
   browserSync.init({
@@ -22,8 +21,8 @@ gulp.task('acss', () => {
   return gulp.src('*.html')
     .pipe(gulpAtomizer({
       outfile: 'atomic.css',
-      acssConfig: require('./config'),
-      addRules: require('./rules').concat(emmetRules)
+      acssConfig: Object.assign({}, require('./config')),
+      addRules: require('atomizer-emmet-compat').concat(require('./rules'))
     }))
     .pipe(gulp.dest('dist'));
 });
