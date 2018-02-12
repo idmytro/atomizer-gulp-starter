@@ -2,4 +2,4 @@
 
 Atomic css with gulp-atomizer and browser-sync starter
 
-`npm i gulp gulp-atomizer atomizer-emmet-compat browser-sync -D`
+`npm i gulp gulp-atomizer browser-sync -D`
