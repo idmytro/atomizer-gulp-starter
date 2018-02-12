@@ -3,7 +3,6 @@
     "start": "./node_modules/gulp/bin/gulp.js"
   },
   "devDependencies": {
-    "atomizer-emmet-compat": "0.1.2",
     "browser-sync": "2.18.13",
     "gulp": "3.9.1",
     "gulp-atomizer": "3.0.7"
