@@ -2,21 +2,6 @@ const gulp = require('gulp');
 const gulpAtomizer = require('gulp-atomizer');
 const browserSync = require('browser-sync').create();
 
-gulp.task('bs', ['acss'], () => {
-  browserSync.init({
-    server: {
-      baseDir: "./"
-    }
-  });
-
-  gulp.watch(["*.html"], ['acss', 'html-watch']);
-});
-
-gulp.task('html-watch', done => {
-  browserSync.reload();
-  done();
-});
-
 gulp.task('acss', () => {
   return gulp.src('*.html')
     .pipe(gulpAtomizer({
@@ -27,4 +12,19 @@ gulp.task('acss', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['bs']);
+gulp.task('bs', gulp.series('acss', () => {
+  browserSync.init({
+    server: {
+      baseDir: "./"
+    }
+  });
+
+  gulp.watch(["*.html"], gulp.parallel(['acss', 'html-watch']));
+}));
+
+gulp.task('html-watch', gulp.series(done => {
+  browserSync.reload();
+  done();
+}));
+
+gulp.task('default', gulp.series('bs'));
