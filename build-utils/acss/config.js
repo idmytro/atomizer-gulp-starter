@@ -2,6 +2,9 @@
 
 module.exports = {
     custom: {
-        brandColor: '#0280ae'
-    }
+        brand: '#0280ae'
+    },
+    // breakpoints: {},
+    // classNames: [],
+    // exclude: []
 };
