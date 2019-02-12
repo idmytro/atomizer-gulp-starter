@@ -4,7 +4,7 @@ module.exports = {
     custom: {
         brand: '#0280ae'
     },
-    // breakpoints: {},
+    // breakPoints: {},
     // classNames: [],
     // exclude: []
 };
