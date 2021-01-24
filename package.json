@@ -3,8 +3,8 @@
     "start": "./node_modules/gulp/bin/gulp.js"
   },
   "devDependencies": {
-    "browser-sync": "2.18.13",
-    "gulp": "3.9.1",
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
     "gulp-atomizer": "https://github.com/idmytro/gulp-atomizer.git#2021"
   },
   "engines": {
