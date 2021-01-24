@@ -4,7 +4,7 @@ const browserSync = require("browser-sync").create();
 
 gulp.task("acss", () => {
   return gulp
-    .src("*.html")
+    .src(["*.html"])
     .pipe(
       gulpAtomizer({
         outfile: "atomic.css",
@@ -15,7 +15,7 @@ gulp.task("acss", () => {
     .pipe(gulp.dest("dist"));
 });
 
-gulp.task("html-watch", done => {
+gulp.task("reload", done => {
   browserSync.reload();
   done();
 });
@@ -29,7 +29,7 @@ gulp.task(
       }
     });
 
-    gulp.watch(["*.html"], gulp.parallel("acss", "html-watch"));
+    gulp.watch(["*.html"], gulp.series("acss", "reload"));
   })
 );
 
