@@ -4,7 +4,6 @@
   },
   "devDependencies": {
     "atomizer": "^3.8.0",
-    "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
     "gulp-atomizer": "^3.0.7",
     "watch-require": "^1.2.0"

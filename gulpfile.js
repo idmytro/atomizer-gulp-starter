@@ -1,7 +1,5 @@
 const gulp = require("gulp");
 const gulpAtomizer = require("gulp-atomizer");
-const browserSync = require("browser-sync").create();
-
 const watchRequire = require("watch-require");
 const util = require("util");
 const path = require("path");
@@ -31,32 +29,9 @@ gulp.task("acss", () => {
     .pipe(gulp.dest(paths.dest));
 });
 
-gulp.task("bs-init", done => {
-  browserSync.init({
-    server: {
-      baseDir: "./"
-    }
-  });
-  done();
-});
-
-gulp.task("bs-reload", done => {
-  browserSync.reload();
-  done();
-});
-
 gulp.task(
-  "bs",
-  gulp.series("acss", "bs-init", () => {
-    gulp.watch(paths.watch, gulp.series("acss", "bs-reload"));
-  })
-);
-
-gulp.task(
-  "watch",
+  "default",
   gulp.series("acss", () => {
     gulp.watch(paths.watch, gulp.series("acss"));
   })
 );
-
-gulp.task("default", gulp.series("bs"));
