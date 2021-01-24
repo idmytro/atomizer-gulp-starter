@@ -6,12 +6,19 @@ const watchRequire = require("watch-require");
 const util = require("util");
 const path = require("path");
 
+const paths = {
+  outfile: "atomic.css",
+  src: ["*.html"],
+  dest: "dist",
+  watch: ["*.html", "./build-utils/acss/*.js"]
+};
+
 const config = watchRequire(path.resolve("./build-utils/acss/config.js"));
 const rules = watchRequire(path.resolve("./build-utils/acss/rules.js"));
 
 const atomizerOptions = () => {
   return {
-    outfile: "atomic.css",
+    outfile: paths.outfile,
     acssConfig: Object.assign({}, config.exports),
     addRules: rules.exports
   };
@@ -19,9 +26,18 @@ const atomizerOptions = () => {
 
 gulp.task("acss", () => {
   return gulp
-    .src(["*.html"])
+    .src(paths.src)
     .pipe(gulpAtomizer(atomizerOptions()))
-    .pipe(gulp.dest("dist"));
+    .pipe(gulp.dest(paths.dest));
+});
+
+gulp.task("bs-init", done => {
+  browserSync.init({
+    server: {
+      baseDir: "./"
+    }
+  });
+  done();
 });
 
 gulp.task("reload", done => {
@@ -31,17 +47,15 @@ gulp.task("reload", done => {
 
 gulp.task(
   "bs",
-  gulp.series("acss", () => {
-    browserSync.init({
-      server: {
-        baseDir: "./"
-      }
-    });
+  gulp.series("acss", "bs-init", () => {
+    gulp.watch(paths.watch, gulp.series("acss", "reload"));
+  })
+);
 
-    gulp.watch(
-      ["*.html", "./build-utils/acss/*.js"],
-      gulp.series("acss", "reload")
-    );
+gulp.task(
+  "watch",
+  gulp.series("acss", () => {
+    gulp.watch(paths.watch, gulp.series("acss"));
   })
 );
 
