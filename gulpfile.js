@@ -2,6 +2,13 @@ const gulp = require("gulp");
 const gulpAtomizer = require("gulp-atomizer");
 const browserSync = require("browser-sync").create();
 
+const paths = {
+  outfile: "atomic.css",
+  src: ["*.html"],
+  dest: "dist",
+  watch: ["*.html", "./build-utils/acss/*.js"]
+};
+
 gulp.task("acss", () => {
   return gulp
     .src(["*.html"])
@@ -15,21 +22,24 @@ gulp.task("acss", () => {
     .pipe(gulp.dest("dist"));
 });
 
-gulp.task("reload", done => {
+gulp.task("bs-init", done => {
+  browserSync.init({
+    server: {
+      baseDir: "./"
+    }
+  });
+  done();
+});
+
+gulp.task("bs-reload", done => {
   browserSync.reload();
   done();
 });
 
 gulp.task(
   "bs",
-  gulp.series("acss", () => {
-    browserSync.init({
-      server: {
-        baseDir: "./"
-      }
-    });
-
-    gulp.watch(["*.html"], gulp.series("acss", "reload"));
+  gulp.series("acss", "bs-init", () => {
+    gulp.watch(paths.watch, gulp.series("acss", "bs-reload"));
   })
 );
 
