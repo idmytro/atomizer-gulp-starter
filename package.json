@@ -3,11 +3,11 @@
     "start": "./node_modules/gulp/bin/gulp.js"
   },
   "devDependencies": {
-    "browser-sync": "2.18.13",
-    "gulp": "3.9.1",
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
     "gulp-atomizer": "^3.0.7"
   },
   "engines": {
-    "node": ">=10.0.0 <12.0.0"
+    "node": ">= 12.0.0"
   }
 }
