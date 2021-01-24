@@ -40,7 +40,7 @@ gulp.task("bs-init", done => {
   done();
 });
 
-gulp.task("reload", done => {
+gulp.task("bs-reload", done => {
   browserSync.reload();
   done();
 });
@@ -48,7 +48,7 @@ gulp.task("reload", done => {
 gulp.task(
   "bs",
   gulp.series("acss", "bs-init", () => {
-    gulp.watch(paths.watch, gulp.series("acss", "reload"));
+    gulp.watch(paths.watch, gulp.series("acss", "bs-reload"));
   })
 );
 
